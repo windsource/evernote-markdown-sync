@@ -2,11 +2,11 @@ package de.windwolke.EvernoteMarkdownSync.GitService;
 
 import org.joda.time.DateTime;
 
-public class GitDocument {
+public class GitObject {
 	private String fileName;
 	private DateTime lastChange;
 	
-	public GitDocument(String fileName, DateTime lastChange) {
+	public GitObject(String fileName, DateTime lastChange) {
 		super();
 		this.fileName = fileName;
 		this.lastChange = lastChange;
