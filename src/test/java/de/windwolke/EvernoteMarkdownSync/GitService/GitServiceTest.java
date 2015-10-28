@@ -7,8 +7,9 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
-import de.windwolke.EvernoteMarkdownSync.GitService.GitObject;
-import de.windwolke.EvernoteMarkdownSync.GitService.GitService;
+import de.windwolke.EvernoteMarkdownSync.Git.GitException;
+import de.windwolke.EvernoteMarkdownSync.Git.GitObject;
+import de.windwolke.EvernoteMarkdownSync.Git.GitService;
 
 public class GitServiceTest {
 
