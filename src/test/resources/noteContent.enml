@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+	<en-note>
+		<div>
+			<en-todo checked="true" />EMail-Adressen einrichten</div>
+		<div>
+			<en-todo checked="true" />Joomla aufsetzen</div>
+		<div>
+			<en-todo checked="true" />Template suchen</div>
+	</en-note>

@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  */
 public class GitService {
 	private File pathToDocuments;
-	final Logger log = LoggerFactory.getLogger(GitService.class);
+	final static Logger log = LoggerFactory.getLogger(GitService.class);
 
 	/**
 	 * @param pathToDocs path to the folder inside a git repository 
