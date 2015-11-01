@@ -26,7 +26,6 @@ public class EvernoteMarkdownSync {
 	final static Logger log = LoggerFactory.getLogger(EvernoteMarkdownSync.class);
 
 	private boolean sandbox = false;
-	private String notebook = "";
 	private String token = "";
 	private String path = "";
 
@@ -49,13 +48,6 @@ public class EvernoteMarkdownSync {
                 .required()
                 .build() );
 		
-		options.addOption( Option.builder("n")
-				.desc( "Evernote notebook to use" )
-                .hasArg()
-                .argName("NOTEBOOK")
-                .required()
-                .build() );
-
 		options.addOption( Option.builder("p")
 				.desc( "path to markdown documents inside git repository" )
                 .hasArg()
@@ -70,7 +62,6 @@ public class EvernoteMarkdownSync {
 			CommandLine cmd = parser.parse( options, args);
 			
 			token = cmd.getOptionValue("t");
-			notebook = cmd.getOptionValue("n");
 			path = cmd.getOptionValue("p");
 					
 			if ( cmd.hasOption("s") ) {
@@ -79,7 +70,7 @@ public class EvernoteMarkdownSync {
 			
 		} catch (ParseException e) {
 			HelpFormatter formatter = new HelpFormatter();
-			formatter.printHelp( "EvernoteMarkdownSync", options );
+			formatter.printHelp( "EvernoteMarkdownSync -p <PATH> -t <TOKEN>", options );
 			
 			System.exit(1);
 		}

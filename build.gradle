@@ -12,6 +12,10 @@ jar {
                    'Implementation-Version': version,
                    'Main-Class': 'de.windwolke.EvernoteMarkdownSync.EvernoteMarkdownSync'
     }
+	
+	from {
+		configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+	}
 }
 
 dependencies {
