@@ -1,4 +1,4 @@
-# something new
+# something very new
 
 # Resources
 * [SQL tutorial from W3Schools.com](http://www.w3schools.com/sql)
