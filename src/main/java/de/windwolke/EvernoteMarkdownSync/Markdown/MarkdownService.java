@@ -1,8 +1,11 @@
 package de.windwolke.EvernoteMarkdownSync.Markdown;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -21,6 +24,8 @@ public class MarkdownService {
 
 	private PegDownProcessor processor;
 	private Set<String> markdownFileExtensions = new HashSet<String>();
+	private String styleSheet = "";
+	private final String STYLE_SHEET_FILE = "/style.css";
 	
 	public MarkdownService () {
 		markdownFileExtensions.add("md");
@@ -31,6 +36,15 @@ public class MarkdownService {
 				| Extensions.AUTOLINKS | Extensions.TABLES
 				| Extensions.FENCED_CODE_BLOCKS | Extensions.STRIKETHROUGH
 				| Extensions.ATXHEADERSPACE | Extensions.TASKLISTITEMS);
+		
+		// read style sheet
+		URL url = MarkdownService.class.getResource(STYLE_SHEET_FILE);
+		try {
+			byte[] encoded = Files.readAllBytes(Paths.get(url.toURI()));
+			styleSheet = new String(encoded, "UTF-8");
+		} catch (IOException | URISyntaxException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -61,22 +75,21 @@ public class MarkdownService {
 	}
 
 	/**
-	 * Convert markdown into HTML (just the body content)
+	 * Convert markdown into HTML (just the body content) with inline styles
 	 * 
 	 * @param markdown Markdown to convert into HTML
 	 * @return
 	 */
 	String markdownToHtml(String markdown) {
-		String html;
 		Map<String, VerbatimSerializer> verbatimSerializers = new HashMap<>();
 		verbatimSerializers.put(MyCustomVerbatimSerializer.DEFAULT, MyCustomVerbatimSerializer.INSTANCE);
 
-		html = processor.markdownToHtml(markdown.toCharArray(), new LinkRenderer(), verbatimSerializers);
+		String htmlBody = processor.markdownToHtml(markdown.toCharArray(), new LinkRenderer(), verbatimSerializers);
 		
-		return html;
+		String htmlWithStyleInline = new HtmlStyleSheetInliner().inlineStyleSheet(htmlBody, styleSheet);
+		
+		return htmlWithStyleInline;
 	}
-	
-	
 
 	/**
 	 * Returns true if the given filename contains one of the known markdown

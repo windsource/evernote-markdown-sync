@@ -8,12 +8,11 @@ import org.pegdown.PegDownProcessor;
 public class MarkdownServiceTest {
 
 	@Test
-    public void testPegDown() 
+    public void testMarkdownToHtml() 
     {
-		PegDownProcessor p = new PegDownProcessor();
-		String md = "# Titel\nSome text!\n\n```bash\necho \"hello world!\"```";
-		String result = p.markdownToHtml(md);
-		System.out.println(result);
+		MarkdownService ms = new MarkdownService();
+		String md = "# Titel\nSome text!\n\n``` sql\necho \"hello world!\"```\n\n";
+		String result = ms.markdownToHtml(md);
     }
 	
 	@Test

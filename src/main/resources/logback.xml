@@ -9,9 +9,10 @@
   </appender>
   
   <logger name="de.windwolke.EvernoteMarkdownSync.Git" level="DEBUG" />
-  <logger name="de.windwolke.EvernoteMarkdownSync.Evernote" level="info" />
-  <logger name="de.windwolke.EvernoteMarkdownSync.Markdown" level="DEBUG" />
-
+  <logger name="de.windwolke.EvernoteMarkdownSync.Evernote" level="INFO" />
+  <logger name="de.windwolke.EvernoteMarkdownSync.Markdown" level="INFO" />
+  <logger name="cz.vutbr.web" level="OFF" />
+  
   <root level="info">
     <appender-ref ref="STDOUT" />
   </root>
