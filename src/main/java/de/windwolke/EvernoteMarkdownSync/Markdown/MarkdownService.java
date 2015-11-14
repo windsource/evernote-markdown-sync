@@ -1,25 +1,36 @@
 package de.windwolke.EvernoteMarkdownSync.Markdown;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.io.FilenameUtils;
+import org.pegdown.Extensions;
+import org.pegdown.LinkRenderer;
 import org.pegdown.PegDownProcessor;
+import org.pegdown.VerbatimSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MarkdownService {
+	final static Logger LOG = LoggerFactory.getLogger(MarkdownService.class);
 
-	private PegDownProcessor processor = new PegDownProcessor();
+	private PegDownProcessor processor;
 	private Set<String> markdownFileExtensions = new HashSet<String>();
 	
 	public MarkdownService () {
 		markdownFileExtensions.add("md");
 		markdownFileExtensions.add("txt");
-		markdownFileExtensions.add("markdown");		
+		markdownFileExtensions.add("markdown");
+		
+		processor = new PegDownProcessor(Extensions.HARDWRAPS
+				| Extensions.AUTOLINKS | Extensions.TABLES
+				| Extensions.FENCED_CODE_BLOCKS | Extensions.STRIKETHROUGH
+				| Extensions.ATXHEADERSPACE | Extensions.TASKLISTITEMS);
 	}
 
 	/**
@@ -46,8 +57,26 @@ public class MarkdownService {
 		              + "<en-note>";
 		String postfix = "</en-note>"; 
 		
-		return prefix + processor.markdownToHtml(markdown) + postfix;
+		return prefix + markdownToHtml(markdown) + postfix;
 	}
+
+	/**
+	 * Convert markdown into HTML (just the body content)
+	 * 
+	 * @param markdown Markdown to convert into HTML
+	 * @return
+	 */
+	String markdownToHtml(String markdown) {
+		String html;
+		Map<String, VerbatimSerializer> verbatimSerializers = new HashMap<>();
+		verbatimSerializers.put(MyCustomVerbatimSerializer.DEFAULT, MyCustomVerbatimSerializer.INSTANCE);
+
+		html = processor.markdownToHtml(markdown.toCharArray(), new LinkRenderer(), verbatimSerializers);
+		
+		return html;
+	}
+	
+	
 
 	/**
 	 * Returns true if the given filename contains one of the known markdown

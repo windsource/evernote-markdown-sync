@@ -1,7 +1,5 @@
 package de.windwolke.EvernoteMarkdownSync.Evernote;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,21 +15,15 @@ import com.evernote.edam.notestore.NoteFilter;
 import com.evernote.edam.notestore.NoteList;
 import com.evernote.edam.type.Note;
 import com.evernote.edam.type.NoteAttributes;
-import com.evernote.edam.type.NoteSortOrder;
-import com.evernote.edam.type.Resource;
-import com.evernote.edam.type.ResourceAttributes;
 import com.evernote.thrift.TException;
-import com.evernote.thrift.transport.TTransportException;
-
-import de.windwolke.EvernoteMarkdownSync.Git.GitService;
 
 public class MyEvernoteService {
-	final static Logger log = LoggerFactory.getLogger(MyEvernoteService.class);
+	final static Logger LOG = LoggerFactory.getLogger(MyEvernoteService.class);
 
 	private UserStoreClient userStore;
 	private NoteStoreClient noteStore;
-	private String newNoteGuid;
 	
+	@SuppressWarnings("unused")
 	private String token;
 	
 	/**
@@ -56,7 +48,7 @@ public class MyEvernoteService {
 				com.evernote.edam.userstore.Constants.EDAM_VERSION_MAJOR,
 				com.evernote.edam.userstore.Constants.EDAM_VERSION_MINOR);
 		if (!versionOk) {
-			log.error("Incompatible Evernote client protocol version");
+			LOG.error("Incompatible Evernote client protocol version");
 			System.exit(1);
 		}
 
@@ -74,6 +66,8 @@ public class MyEvernoteService {
 	 * @throws Exception
 	 */
 	public Note createNote(String title, String content, Long date, String source) throws Exception {
+		LOG.debug("Creating new note: {}", title);
+		
 		Note note = new Note();
 		note.setTitle(title);
 		note.setContent(content);
@@ -87,6 +81,7 @@ public class MyEvernoteService {
 			note.setAttributes(attributes);
 		}
 
+		LOG.debug(content);
 		return noteStore.createNote(note);
 	}
 
@@ -118,6 +113,7 @@ public class MyEvernoteService {
 	 * @throws TException
 	 */
 	public Note updateNote(Note note) throws EDAMUserException, EDAMSystemException, EDAMNotFoundException, TException {
+		LOG.debug("Updating note: {}", note.getTitle());
 		return noteStore.updateNote(note);
 	}
 }

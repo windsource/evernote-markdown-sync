@@ -9,6 +9,8 @@
   </appender>
   
   <logger name="de.windwolke.EvernoteMarkdownSync.Git" level="DEBUG" />
+  <logger name="de.windwolke.EvernoteMarkdownSync.Evernote" level="info" />
+  <logger name="de.windwolke.EvernoteMarkdownSync.Markdown" level="DEBUG" />
 
   <root level="info">
     <appender-ref ref="STDOUT" />

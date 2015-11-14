@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  */
 public class GitService {
 	private File pathToDocuments;
-	final static Logger log = LoggerFactory.getLogger(GitService.class);
+	final static Logger LOG = LoggerFactory.getLogger(GitService.class);
 
 	/**
 	 * @param pathToDocs path to the folder inside a git repository 
@@ -39,25 +39,30 @@ public class GitService {
 		// first retrieve the list of the objects
 		Process p;
 		try {
-			String cmd[] = {"git", "ls-tree", "--name-only", "HEAD", "."}; 
+			// Note: the -z options is required because without it special characters
+			//       like German umlaute are not handled correctly.
+			String cmd[] = {"git", "ls-tree", "--name-only", "-z", "HEAD", "."}; 
 			p = Runtime.getRuntime().exec(cmd, null, pathToDocuments);
 			p.waitFor();
 			if ( p.exitValue() != 0 ) {
-				throw new GitException();
+				throw new GitException("Git exit with " + p.exitValue());
 			}
 			
 			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-			String line;			
-			while ((line = reader.readLine())!= null) {
-				DateTime dt = getDateTimeForObject(line);
-				result.add(new GitObject(line, dt));
-				log.debug("Found file {} with date {}",line, ISODateTimeFormat.dateTime().print(dt));
+			String zeroDelimitedlines;			
+			while ((zeroDelimitedlines = reader.readLine())!= null) {
+				String[] lines = zeroDelimitedlines.split("\0");
+				for (String line: lines) {
+					DateTime dt = getDateTimeForObject(line);
+					result.add(new GitObject(line, dt));
+					LOG.debug("Found file {} with date {}",line, ISODateTimeFormat.dateTime().print(dt));					
+				}
 			}
 			reader.close();
 		}
 		catch (IOException|InterruptedException ex) {
 			ex.printStackTrace();
-			throw new GitException();
+			throw new GitException("Unknwon git error");
 		}
 		
 		return result;
@@ -71,7 +76,7 @@ public class GitService {
 		p = Runtime.getRuntime().exec(cmd, null, pathToDocuments);
 		p.waitFor();
 		if ( p.exitValue() != 0 ) {
-			throw new GitException();
+			throw new GitException("Could not get time for " + name);
 		}
 		BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
