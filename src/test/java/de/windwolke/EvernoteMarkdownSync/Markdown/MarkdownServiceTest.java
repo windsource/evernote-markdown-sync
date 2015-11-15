@@ -2,13 +2,18 @@ package de.windwolke.EvernoteMarkdownSync.Markdown;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
+import javax.xml.transform.TransformerException;
+
 import org.junit.Test;
 import org.pegdown.PegDownProcessor;
+import org.xml.sax.SAXException;
 
 public class MarkdownServiceTest {
 
 	@Test
-    public void testMarkdownToHtml() 
+    public void testMarkdownToHtml() throws SAXException, IOException, TransformerException 
     {
 		MarkdownService ms = new MarkdownService();
 		String md = "# Titel\nSome text!\n\n``` sql\necho \"hello world!\"```\n\n";

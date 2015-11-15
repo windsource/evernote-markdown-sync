@@ -23,7 +23,7 @@ import de.windwolke.EvernoteMarkdownSync.Git.GitService;
 import de.windwolke.EvernoteMarkdownSync.Markdown.MarkdownService;
 
 public class EvernoteMarkdownSync {
-	final static Logger log = LoggerFactory.getLogger(EvernoteMarkdownSync.class);
+	final static Logger LOG = LoggerFactory.getLogger(EvernoteMarkdownSync.class);
 
 	private boolean sandbox = false;
 	private String token = "";
@@ -95,7 +95,7 @@ public class EvernoteMarkdownSync {
 					String content = ms.markdownToEnml(Paths.get(path,go.getFileName()));
 					
 					es.createNote(title, content, go.getLastChange().getMillis(), source);
-					log.info("New '{}'", go.getFileName());
+					LOG.info("New '{}'", go.getFileName());
 				}
 				else if (nl.getTotalNotes() == 1) {
 					// Note already exists in Evernote
@@ -107,14 +107,14 @@ public class EvernoteMarkdownSync {
 						note.setContent(content);
 						note.setUpdated(go.getLastChange().getMillis());
 						es.updateNote(note);
-						log.info("Modified '{}'", go.getFileName());						
+						LOG.info("Modified '{}'", go.getFileName());						
 					}
 					else {
-						log.info("Unmodified '{}'", go.getFileName());						
+						LOG.info("Unmodified '{}'", go.getFileName());						
 					}
 				}
 				else {
-					log.error("Note '{}' found multiple times!", go.getFileName());											
+					LOG.error("Note '{}' found multiple times!", go.getFileName());											
 				}
 			}
 		}

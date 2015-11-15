@@ -11,6 +11,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.xml.transform.TransformerException;
+
 import org.apache.commons.io.FilenameUtils;
 import org.pegdown.Extensions;
 import org.pegdown.LinkRenderer;
@@ -18,6 +20,7 @@ import org.pegdown.PegDownProcessor;
 import org.pegdown.VerbatimSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.xml.sax.SAXException;
 
 public class MarkdownService {
 	final static Logger LOG = LoggerFactory.getLogger(MarkdownService.class);
@@ -53,8 +56,10 @@ public class MarkdownService {
 	 * @param path Path to the file containing the markdown in UTF-8
 	 * @return ENML coded document 
 	 * @throws IOException 
+	 * @throws TransformerException 
+	 * @throws SAXException 
 	 */
-	public String markdownToEnml(Path path) throws IOException {
+	public String markdownToEnml(Path path) throws IOException, SAXException, TransformerException {
 		byte[] encoded = Files.readAllBytes(path);
 		return markdownToEnml(new String(encoded, "UTF-8"));
 	}
@@ -64,8 +69,11 @@ public class MarkdownService {
 	 * 
 	 * @param markdown String containing the markdown to convert
 	 * @return ENML coded document 
+	 * @throws TransformerException 
+	 * @throws IOException 
+	 * @throws SAXException 
 	 */
-	public String markdownToEnml(String markdown) {
+	public String markdownToEnml(String markdown) throws SAXException, IOException, TransformerException {
 		String prefix = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n"
 		              + "<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">\n"
 		              + "<en-note>";
@@ -79,14 +87,19 @@ public class MarkdownService {
 	 * 
 	 * @param markdown Markdown to convert into HTML
 	 * @return
+	 * @throws TransformerException 
+	 * @throws IOException 
+	 * @throws SAXException 
 	 */
-	String markdownToHtml(String markdown) {
+	String markdownToHtml(String markdown) throws SAXException, IOException, TransformerException {
 		Map<String, VerbatimSerializer> verbatimSerializers = new HashMap<>();
 		verbatimSerializers.put(MyCustomVerbatimSerializer.DEFAULT, MyCustomVerbatimSerializer.INSTANCE);
 
 		String htmlBody = processor.markdownToHtml(markdown.toCharArray(), new LinkRenderer(), verbatimSerializers);
-		
+		LOG.debug("Body before styles: {}",htmlBody);
+
 		String htmlWithStyleInline = new HtmlStyleSheetInliner().inlineStyleSheet(htmlBody, styleSheet);
+		LOG.debug("Body after styles: {}",htmlWithStyleInline);
 		
 		return htmlWithStyleInline;
 	}
