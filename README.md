@@ -20,7 +20,7 @@ usage: EvernoteMarkdownSync -p <PATH> -t <TOKEN>
  -t <TOKEN>   Evernote token used to access account
 ```
 
-When running Evernote Markdown Sync for the first time every note is created in Evernote. Subsequent runs will update only the notes that were changed.
+When running Evernote Markdown Sync for the first time every note is created in Evernote. Subsequent runs will update only the notes in Evernote that were changed in the Git repository.
 
 ## Architecture
 
