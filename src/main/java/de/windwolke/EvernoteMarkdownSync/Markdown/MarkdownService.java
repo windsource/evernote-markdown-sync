@@ -51,29 +51,33 @@ public class MarkdownService {
 	}
 
 	/**
-	 * Converts a markdown document to ENML (Evernote Markup Language)
+	 * Converts a Markdown document to ENML (Evernote Markup Language)
 	 * 
-	 * @param path Path to the file containing the markdown in UTF-8
+	 * @param path Path to the file containing the Markdown in UTF-8
 	 * @return ENML coded document 
-	 * @throws IOException 
-	 * @throws TransformerException 
-	 * @throws SAXException 
+	 * @throws MarkdownException 
 	 */
-	public String markdownToEnml(Path path) throws IOException, SAXException, TransformerException {
-		byte[] encoded = Files.readAllBytes(path);
-		return markdownToEnml(new String(encoded, "UTF-8"));
+	public String markdownToEnml(Path path) throws MarkdownException {
+		String enml;
+		try {
+			byte[] encoded;
+			encoded = Files.readAllBytes(path);
+			enml = markdownToEnml(new String(encoded, "UTF-8"));
+		} catch (IOException e) {
+			e.printStackTrace();
+	        throw new MarkdownException("Note is not UTF-8 encoded.");		
+		}
+		return enml;
 	}
 
 	/**
-	 * Converts a markdown document to ENML (Evernote Markup Language)
+	 * Converts a Markdown document to ENML (Evernote Markup Language)
 	 * 
-	 * @param markdown String containing the markdown to convert
+	 * @param markdown String containing the Markdown to convert
 	 * @return ENML coded document 
-	 * @throws TransformerException 
-	 * @throws IOException 
-	 * @throws SAXException 
+	 * @throws MarkdownException 
 	 */
-	public String markdownToEnml(String markdown) throws SAXException, IOException, TransformerException {
+	public String markdownToEnml(String markdown) throws MarkdownException {
 		String prefix = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n"
 		              + "<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">\n"
 		              + "<en-note>";
@@ -83,29 +87,33 @@ public class MarkdownService {
 	}
 
 	/**
-	 * Convert markdown into HTML (just the body content) with inline styles
+	 * Convert Markdown into HTML (just the body content) with inline styles
 	 * 
 	 * @param markdown Markdown to convert into HTML
-	 * @return
-	 * @throws TransformerException 
-	 * @throws IOException 
-	 * @throws SAXException 
+	 * @return String containing HTML (just the body content)
+	 * @throws MarkdownException 
 	 */
-	String markdownToHtml(String markdown) throws SAXException, IOException, TransformerException {
+	String markdownToHtml(String markdown) throws MarkdownException {
 		Map<String, VerbatimSerializer> verbatimSerializers = new HashMap<>();
 		verbatimSerializers.put(MyCustomVerbatimSerializer.DEFAULT, MyCustomVerbatimSerializer.INSTANCE);
 
 		String htmlBody = processor.markdownToHtml(markdown.toCharArray(), new LinkRenderer(), verbatimSerializers);
 		LOG.debug("Body before styles: {}",htmlBody);
 
-		String htmlWithStyleInline = new HtmlStyleSheetInliner().inlineStyleSheet(htmlBody, styleSheet);
+		String htmlWithStyleInline = "";
+		try {
+			htmlWithStyleInline = new HtmlStyleSheetInliner().inlineStyleSheet(htmlBody, styleSheet);
+		} catch (SAXException | IOException | TransformerException e) {
+			e.printStackTrace();
+			throw new MarkdownException("Could not turn Markdown to HTML");
+		}
 		LOG.debug("Body after styles: {}",htmlWithStyleInline);
 		
 		return htmlWithStyleInline;
 	}
 
 	/**
-	 * Returns true if the given filename contains one of the known markdown
+	 * Returns true if the given filename contains one of the known Markdown
 	 * filename extensions
 	 * 
 	 * @param filename

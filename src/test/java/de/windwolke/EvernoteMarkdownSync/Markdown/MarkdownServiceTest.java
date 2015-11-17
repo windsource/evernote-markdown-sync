@@ -13,7 +13,7 @@ import org.xml.sax.SAXException;
 public class MarkdownServiceTest {
 
 	@Test
-    public void testMarkdownToHtml() throws SAXException, IOException, TransformerException 
+    public void testMarkdownToHtml() throws MarkdownException
     {
 		MarkdownService ms = new MarkdownService();
 		String md = "# Titel\nSome text!\n\n``` sql\necho \"hello world!\"```\n\n";
