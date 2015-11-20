@@ -6,12 +6,15 @@ repositories {
 }
 
 version = '0.1'
+
 jar {
     manifest {
         attributes 'Implementation-Title': 'Evernote Markdown Sync',
                    'Implementation-Version': version,
                    'Main-Class': 'de.windwolke.EvernoteMarkdownSync.EvernoteMarkdownSync'
     }
+	
+	baseName = 'evernote-markdown-sync'
 	
 	from {
 		configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }

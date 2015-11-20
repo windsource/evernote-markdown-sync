@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class EvernoteMarkdownSyncTest {
+	// A sandbox token just for test
 	static final String token = "S=s1:U=91a09:E=15816c57126:C=150bf1444a0:P=1cd:A=en-devtoken:V=2:H=b3ecd2f9e715a8ef2d4b3fc6edf398fb";
 
 	@Test
