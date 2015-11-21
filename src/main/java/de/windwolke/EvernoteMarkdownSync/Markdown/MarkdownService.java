@@ -1,11 +1,10 @@
 package de.windwolke.EvernoteMarkdownSync.Markdown;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.io.InputStream;
+import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -14,6 +13,7 @@ import java.util.Set;
 import javax.xml.transform.TransformerException;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.pegdown.Extensions;
 import org.pegdown.LinkRenderer;
 import org.pegdown.PegDownProcessor;
@@ -41,11 +41,14 @@ public class MarkdownService {
 				| Extensions.ATXHEADERSPACE | Extensions.TASKLISTITEMS);
 		
 		// read style sheet
-		URL url = MarkdownService.class.getResource(STYLE_SHEET_FILE);
+		InputStream inputStream = MarkdownService.class.getResourceAsStream(STYLE_SHEET_FILE);
+		
+		StringWriter writer = new StringWriter();
+		
 		try {
-			byte[] encoded = Files.readAllBytes(Paths.get(url.toURI()));
-			styleSheet = new String(encoded, "UTF-8");
-		} catch (IOException | URISyntaxException e) {
+			IOUtils.copy(inputStream, writer, "UTF-8");
+			styleSheet = writer.toString();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
