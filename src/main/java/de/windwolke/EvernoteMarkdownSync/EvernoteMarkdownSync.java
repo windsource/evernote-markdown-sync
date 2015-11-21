@@ -70,7 +70,7 @@ public class EvernoteMarkdownSync {
 			
 		} catch (ParseException e) {
 			HelpFormatter formatter = new HelpFormatter();
-			formatter.printHelp( "EvernoteMarkdownSync -p <PATH> -t <TOKEN>", options );
+			formatter.printHelp( "java -jar evernote-markdown-sync-<version>.jar -p <PATH> -t <TOKEN>", options );
 			
 			System.exit(1);
 		}

@@ -10,7 +10,7 @@ So I searched for a way to write my notes as Markdown files, store them in git a
 
 1. Git must be installed on the machine
 2. You must get a [developer token for your Evernote account](https://dev.evernote.com/doc/articles/dev_tokens.php)
-3. Java SDK 1.7 SDK for build
+3. Java must be installed on the machine
 
 ## Build
 
@@ -29,7 +29,7 @@ The resulting jar will be in `build/libs/` afterwards.
 ## Usage
 
 ```
-usage: EvernoteMarkdownSync -p <PATH> -t <TOKEN>
+usage: java -jar evernote-markdown-sync-<version>.jar -p <PATH> -t <TOKEN>
  -p <PATH>    path to markdown documents inside git repository
  -s           use Evernote sandbox
  -t <TOKEN>   Evernote token used to access account
