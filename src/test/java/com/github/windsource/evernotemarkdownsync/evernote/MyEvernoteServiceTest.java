@@ -1,14 +1,11 @@
-package de.windwolke.EvernoteMarkdownSync.Evernote;
+package com.github.windsource.evernotemarkdownsync.evernote;
 
 import static org.junit.Assert.*;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
@@ -18,6 +15,7 @@ import org.junit.Test;
 
 import com.evernote.edam.notestore.NoteList;
 import com.evernote.edam.type.Note;
+import com.github.windsource.evernotemarkdownsync.evernote.MyEvernoteService;
 
 public class MyEvernoteServiceTest {
 	// A sandbox token just for test

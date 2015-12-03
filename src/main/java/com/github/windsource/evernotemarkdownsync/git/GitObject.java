@@ -1,4 +1,4 @@
-package de.windwolke.EvernoteMarkdownSync.Git;
+package com.github.windsource.evernotemarkdownsync.git;
 
 import org.joda.time.DateTime;
 

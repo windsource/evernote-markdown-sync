@@ -1,4 +1,4 @@
-package de.windwolke.EvernoteMarkdownSync.Evernote;
+package com.github.windsource.evernotemarkdownsync.evernote;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

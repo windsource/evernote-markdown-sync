@@ -1,4 +1,4 @@
-package de.windwolke.EvernoteMarkdownSync.Markdown;
+package com.github.windsource.evernotemarkdownsync.markdown;
 
 /**
  * Created in case any problems occur when turning Markdown to ENML

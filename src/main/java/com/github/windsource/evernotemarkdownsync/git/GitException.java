@@ -1,4 +1,4 @@
-package de.windwolke.EvernoteMarkdownSync.Git;
+package com.github.windsource.evernotemarkdownsync.git;
 
 /**
  * Created in case any problems occur when invoking git

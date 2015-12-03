@@ -1,10 +1,12 @@
-package de.windwolke.EvernoteMarkdownSync;
+package com.github.windsource.evernotemarkdownsync;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+
+import com.github.windsource.evernotemarkdownsync.EvernoteMarkdownSync;
 
 public class EvernoteMarkdownSyncTest {
 	// A sandbox token just for test

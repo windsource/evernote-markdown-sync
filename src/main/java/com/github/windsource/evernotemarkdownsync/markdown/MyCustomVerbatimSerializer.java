@@ -1,4 +1,4 @@
-package de.windwolke.EvernoteMarkdownSync.Markdown;
+package com.github.windsource.evernotemarkdownsync.markdown;
 
 import org.pegdown.Printer;
 import org.pegdown.VerbatimSerializer;

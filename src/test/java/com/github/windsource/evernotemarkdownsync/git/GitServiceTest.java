@@ -1,4 +1,4 @@
-package de.windwolke.EvernoteMarkdownSync.GitService;
+package com.github.windsource.evernotemarkdownsync.git;
 
 import static org.junit.Assert.*;
 
@@ -7,9 +7,9 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
-import de.windwolke.EvernoteMarkdownSync.Git.GitException;
-import de.windwolke.EvernoteMarkdownSync.Git.GitObject;
-import de.windwolke.EvernoteMarkdownSync.Git.GitService;
+import com.github.windsource.evernotemarkdownsync.git.GitException;
+import com.github.windsource.evernotemarkdownsync.git.GitObject;
+import com.github.windsource.evernotemarkdownsync.git.GitService;
 
 public class GitServiceTest {
 

@@ -1,4 +1,4 @@
-package de.windwolke.EvernoteMarkdownSync.Markdown;
+package com.github.windsource.evernotemarkdownsync.markdown;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,14 +1,10 @@
-package de.windwolke.EvernoteMarkdownSync.Markdown;
+package com.github.windsource.evernotemarkdownsync.markdown;
 
 import static org.junit.Assert.*;
 
-import java.io.IOException;
-
-import javax.xml.transform.TransformerException;
-
 import org.junit.Test;
-import org.pegdown.PegDownProcessor;
-import org.xml.sax.SAXException;
+import com.github.windsource.evernotemarkdownsync.markdown.MarkdownException;
+import com.github.windsource.evernotemarkdownsync.markdown.MarkdownService;
 
 public class MarkdownServiceTest {
 

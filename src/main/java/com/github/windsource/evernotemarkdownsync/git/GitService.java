@@ -1,4 +1,4 @@
-package de.windwolke.EvernoteMarkdownSync.Git;
+package com.github.windsource.evernotemarkdownsync.git;
 
 import java.io.BufferedReader;
 import java.io.File;

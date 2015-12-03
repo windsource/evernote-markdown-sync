@@ -1,4 +1,4 @@
-package de.windwolke.EvernoteMarkdownSync;
+package com.github.windsource.evernotemarkdownsync;
 
 import java.nio.file.Paths;
 import java.util.List;
@@ -16,11 +16,10 @@ import org.slf4j.LoggerFactory;
 
 import com.evernote.edam.notestore.NoteList;
 import com.evernote.edam.type.Note;
-
-import de.windwolke.EvernoteMarkdownSync.Evernote.MyEvernoteService;
-import de.windwolke.EvernoteMarkdownSync.Git.GitObject;
-import de.windwolke.EvernoteMarkdownSync.Git.GitService;
-import de.windwolke.EvernoteMarkdownSync.Markdown.MarkdownService;
+import com.github.windsource.evernotemarkdownsync.evernote.MyEvernoteService;
+import com.github.windsource.evernotemarkdownsync.git.GitObject;
+import com.github.windsource.evernotemarkdownsync.git.GitService;
+import com.github.windsource.evernotemarkdownsync.markdown.MarkdownService;
 
 public class EvernoteMarkdownSync {
 	final static Logger LOG = LoggerFactory.getLogger(EvernoteMarkdownSync.class);

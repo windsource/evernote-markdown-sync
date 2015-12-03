@@ -2,7 +2,7 @@
 
 ## Overview
 
-I love [Evernote](https://evernote.com/intl/de/pricing/) as it syncs my notes between all my devices. I also love Markdown as it is easy to write and also supports syntax highlighting which is not supported by Evernote. Thirdly I love Git for keeping track of changes to my work.
+I love [Evernote](https://evernote.com) as it syncs my notes between all my devices. I also love Markdown as it is easy to write and also supports syntax highlighting which is not supported by Evernote. Thirdly I love Git for keeping track of changes to my work.
 
 So I searched for a way to write my notes as Markdown files, store them in git and sync that repository to my Evernote account automatically whenever I change a Markdown file and commit it in Git.
 
