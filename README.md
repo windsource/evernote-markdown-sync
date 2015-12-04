@@ -30,6 +30,8 @@ The resulting jar will be in `build/libs/` afterwards.
 
 ```
 usage: java -jar evernote-markdown-sync-<version>.jar -p <PATH> -t <TOKEN>
+ -f           force update of notes in Evernote even if note in Git did
+              not change
  -p <PATH>    path to markdown documents inside git repository
  -s           use Evernote sandbox
  -t <TOKEN>   Evernote token used to access account

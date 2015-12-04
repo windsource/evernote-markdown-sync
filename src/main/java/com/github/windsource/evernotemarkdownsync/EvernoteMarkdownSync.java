@@ -25,6 +25,7 @@ public class EvernoteMarkdownSync {
 	final static Logger LOG = LoggerFactory.getLogger(EvernoteMarkdownSync.class);
 
 	private boolean sandbox = false;
+	private boolean forceUpdate = false;
 	private String token = "";
 	private String path = "";
 
@@ -55,6 +56,8 @@ public class EvernoteMarkdownSync {
                 .build() );
 
 		options.addOption("s", false, "use Evernote sandbox");
+
+		options.addOption("f", false, "force update of notes in Evernote even if note in Git did not change");
 		
 		CommandLineParser parser = new DefaultParser();
 		try {
@@ -65,6 +68,9 @@ public class EvernoteMarkdownSync {
 					
 			if ( cmd.hasOption("s") ) {
 				sandbox = true;
+			}
+			if ( cmd.hasOption("f") ) {
+				forceUpdate = true;
 			}
 			
 		} catch (ParseException e) {
@@ -101,15 +107,24 @@ public class EvernoteMarkdownSync {
 					Note note = nl.getNotes().get(0);
 					
 					// Check if the note needs to be updated
+					boolean update = false;
 					if ( go.getLastChange().getMillis() > note.getUpdated() ) {
-						String content = ms.markdownToEnml(Paths.get(path,go.getFileName()));
-						note.setContent(content);
-						note.setUpdated(go.getLastChange().getMillis());
-						es.updateNote(note);
+						update = true;
 						LOG.info("Modified '{}'", go.getFileName());						
+					}
+					else if ( forceUpdate) {
+						update = true;
+						LOG.info("Force update of unmodified '{}'", go.getFileName());											
 					}
 					else {
 						LOG.info("Unmodified '{}'", go.getFileName());						
+					}
+					
+					if (update) {
+					    String content = ms.markdownToEnml(Paths.get(path,go.getFileName()));
+						note.setContent(content);
+						note.setUpdated(go.getLastChange().getMillis());
+						es.updateNote(note);
 					}
 				}
 				else {

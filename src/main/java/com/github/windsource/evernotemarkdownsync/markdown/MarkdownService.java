@@ -35,8 +35,8 @@ public class MarkdownService {
 		markdownFileExtensions.add("txt");
 		markdownFileExtensions.add("markdown");
 		
-		processor = new PegDownProcessor(Extensions.HARDWRAPS
-				| Extensions.AUTOLINKS | Extensions.TABLES
+		processor = new PegDownProcessor(
+				Extensions.AUTOLINKS | Extensions.TABLES
 				| Extensions.FENCED_CODE_BLOCKS | Extensions.STRIKETHROUGH
 				| Extensions.ATXHEADERSPACE | Extensions.TASKLISTITEMS);
 		
