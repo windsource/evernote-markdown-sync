@@ -8,7 +8,7 @@ So I searched for a way to write my notes as Markdown files, store them in git a
 
 ## Requirements
 
-1. Git must be installed on the machine
+1. Git 2.5.0 or later must be installed on the machine
 2. You must get a [developer token for your Evernote account](https://dev.evernote.com/doc/articles/dev_tokens.php)
 3. Java must be installed on the machine
 
@@ -47,8 +47,3 @@ For Markdown conversion [pegdown](https://github.com/sirthias/pegdown) is used. 
 ## Credits
 
 The style sheet was taken from [Markdown Here](https://github.com/adam-p/markdown-here) which is a great tool to turn Markdown to HTML when using web browser input fields.
-
-
-
-
-
