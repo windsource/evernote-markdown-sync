@@ -1,7 +1,7 @@
 package com.github.windsource.evernotemarkdownsync.evernote;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.evernote.auth.EvernoteAuth;
 import com.evernote.auth.EvernoteService;
@@ -17,11 +17,18 @@ import com.evernote.edam.type.Note;
 import com.evernote.edam.type.NoteAttributes;
 import com.evernote.thrift.TException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class MyEvernoteService {
 	final static Logger LOG = LoggerFactory.getLogger(MyEvernoteService.class);
 
 	private UserStoreClient userStore;
 	private NoteStoreClient noteStore;
+	
+	final static List<String> tagNames = new ArrayList<String>() {{
+		add("markdown-sync");
+	}};
 	
 	@SuppressWarnings("unused")
 	private String token;
@@ -71,6 +78,7 @@ public class MyEvernoteService {
 		Note note = new Note();
 		note.setTitle(title);
 		note.setContent(content);
+		note.setTagNames(tagNames);
 		if ( date != null) {
 			note.setCreated(date);	
 			note.setUpdated(date);
