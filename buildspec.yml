@@ -14,7 +14,7 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-  artifacts:
-    files:
-      - build/libs/*
-    discard-paths: yes
+artifacts:
+  files:
+    - build/libs/*
+  discard-paths: yes
