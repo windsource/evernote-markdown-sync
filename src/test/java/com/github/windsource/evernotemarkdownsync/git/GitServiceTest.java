@@ -31,10 +31,11 @@ public class GitServiceTest {
 		boolean found = false;
 		for (GitObject go : objects) {
 			if (go.getFileName().equals("gradlew.bat")) {
-				assertEquals(go.getLastChange(), new DateTime("2015-10-25T17:11:25+01:00"));
+				assertEquals(go.getLastChange(), new DateTime("2019-11-01T14:29:23.000+01:00"));
 				found = true;
 			}
 		}
 		assertTrue(found);
     }
 }
+
