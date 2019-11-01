@@ -2,6 +2,8 @@
 
 ## Overview
 
+![Build Status](https://codebuild.eu-west-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiQXFlbnRJK2dlcmZYQmVsZFZoOXcyeTRTQkI3WUR2UDBQTFJtZzV1b1VDOEFvVjUxa2V6UlhBRFJoTGp0b29zZlY4VUlDM2dSREY0cEN0ZWc5d3JpNmpnPSIsIml2UGFyYW1ldGVyU3BlYyI6Ik8rVTFBOVlLTkZqR3NrVU4iLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
+
 I love [Evernote](https://evernote.com) as it syncs my notes between all my devices. I also love Markdown as it is easy to write and also supports syntax highlighting which is not supported by Evernote. Thirdly I love Git for keeping track of changes to my work.
 
 So I searched for a way to write my notes as Markdown files, store them in git and sync that repository to my Evernote account automatically whenever I change a Markdown file and commit it in Git.

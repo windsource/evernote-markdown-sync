@@ -19,7 +19,7 @@ public class GitServiceTest {
 		String path = ".";
 		GitService service = new GitService(path);
 		List<GitObject> objects = service.retrieveDocuments();
-        assertTrue(objects.size() == 8);
+        assertTrue(objects.size() == 9);
     }
 
 	@Test
