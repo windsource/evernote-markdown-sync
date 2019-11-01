@@ -10,7 +10,7 @@ import com.github.windsource.evernotemarkdownsync.EvernoteMarkdownSync;
 
 public class EvernoteMarkdownSyncTest {
 	// A sandbox token just for test
-	static final String token = "S=s1:U=94d74:E=16ccd609f2b:C=16575af7248:P=1cd:A=en-devtoken:V=2:H=ddd7084a7be07d232718bde362e596fc";
+	static final String token = "S=s1:U=958f1:E=1757e169412:C=16e266566d0:P=1cd:A=en-devtoken:V=2:H=396128d9e470bd02311b195c8b494e81";
 
 	@Test
 	public void testSync() throws Exception {
